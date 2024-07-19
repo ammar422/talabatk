@@ -29,13 +29,12 @@ class AuthenticatedSessionController extends Controller
         if ($user == null || $user->count() < 0)
             throw new HttpResponseException($this->response('user not found', 400));
         $user->tokens()->delete();
-        $token = $user->createToken('api-token');
+        $token = $user->createToken('cutomer-token', ['role:customer']);
         return response()->json([
             'status' => true,
             'mesage' => 'user loged in successfully',
             'user' => $user,
             'token' => $token->plainTextToken,
-
         ]);
     }
 

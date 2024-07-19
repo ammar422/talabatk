@@ -16,5 +16,9 @@ class UserSeeder extends Seeder
         User::factory(10)->create([
             'password' => bcrypt(123456789)
         ]);
+
+        foreach (User::all() as $user) {
+            $user->assignRole('customer');
+        }
     }
 }

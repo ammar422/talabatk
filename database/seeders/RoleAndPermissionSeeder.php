@@ -31,26 +31,11 @@ class RoleAndPermissionSeeder extends Seeder
 
         $permissions =
             [
-                'view menu',
-                'place order',
-                'view order status',
-                'cancel order',
-                'rate and review',
-                'manage profile',
-                'manage menu',
-                'view orders',
-                'update order status',
-                'manage restaurant profile',
-                'view ratings and reviews',
-                'view assigned orders',
-                'update delivery status',
-                'view delivery history',
-                'manage users',
-                'manage roles and permissions',
-                'view all orders',
-                'manage system settings',
-                'view reports and analytics',
-                'resolve disputes'
+                // Define permissions for main categories
+                'view main categories',
+                'create main categories',
+                'update main categories',
+                'delete main categories',
             ];
 
         foreach ($permissions as $permission) {
@@ -61,28 +46,16 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         Role::findByName('customer', 'api')->givePermissionTo([
-            'view menu',
-            'place order',
-            'view order status',
-            'cancel order',
-            'rate and review',
-            'manage profile'
+            'view main categories',
         ]);
 
-        Role::findByName('vendor', 'api')->givePermissionTo([
-            'manage menu',
-            'view orders',
-            'update order status',
-            'manage restaurant profile',
-            'view ratings and reviews'
-        ]);
+        // Role::findByName('vendor', 'api')->givePermissionTo([
 
-        Role::findByName('delivery', 'api')->givePermissionTo([
-            'view assigned orders',
-            'update delivery status',
-            'view delivery history',
-            'manage profile'
-        ]);
+        // ]);
+
+        // Role::findByName('delivery', 'api')->givePermissionTo([
+        
+        // ]);
 
         Role::findByName('admin', 'api')->givePermissionTo(Permission::all());
     }
