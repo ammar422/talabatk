@@ -10,14 +10,15 @@ class MainCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'description'
     ];
 
 
 
-    // public function subCategory():HasMany{
-        // return $this->hasMany();
-    // }
+    public function subCategory(): HasMany
+    {
+        return $this->hasMany(SubCategory::class, 'main_category_id', 'id');
+    }
 }

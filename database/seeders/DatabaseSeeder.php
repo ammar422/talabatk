@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MainCategorySeeder::class,
             AdminSeeder::class,
+            SubCategorySeeder::class,
         ]);
     }
 }

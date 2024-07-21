@@ -16,7 +16,7 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
-        $mainCategories = MainCategory::all();
+        $mainCategories = MainCategory::with('subCategory')->get();
         return $this->successResponse('all amin-categories', 'main category', MainCategoryResource::collection($mainCategories));
     }
 
