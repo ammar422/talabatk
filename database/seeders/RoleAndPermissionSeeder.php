@@ -49,14 +49,6 @@ class RoleAndPermissionSeeder extends Seeder
             'view main categories',
         ]);
 
-        // Role::findByName('vendor', 'api')->givePermissionTo([
-
-        // ]);
-
-        // Role::findByName('delivery', 'api')->givePermissionTo([
-        
-        // ]);
-
         Role::findByName('admin', 'api')->givePermissionTo(Permission::all());
     }
 }

@@ -30,4 +30,10 @@ class logindAdminController extends Controller
             'token' => $token->plainTextToken,
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return $this->deletedResponse('admin logedout successfully', 200);
+    }
 }

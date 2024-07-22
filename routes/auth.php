@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\Admin\logindAdminController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\Vendor\VendorAuthController;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest')
@@ -49,4 +50,20 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 // admin authentication routes
 Route::post('admin/login', [logindAdminController::class, 'login'])
     ->middleware('guest')
-    ->name('admin-login');
+    ->name('admin.login');
+
+route::post('admin/logout', [logindAdminController::class, 'destroy'])
+    ->middleware(['auth:admin', 'role:admin'])
+    ->name('admin.logout');
+
+
+
+
+//vendor authentication routes 
+route::post('vendor/login', [VendorAuthController::class, 'login'])
+    ->middleware('guest')
+    ->name('vendor.login');
+
+route::post('vendor/logout', [VendorAuthController::class, 'destroy'])
+    ->middleware(['auth:sanctum', 'role:vendor'])
+    ->name('vendor.logout');

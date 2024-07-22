@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MainCategoryExists;
 use App\Traits\ResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateSubCategoryRequest extends FormRequest
+class StoreVendorRequest extends FormRequest
 {
     use ResponseTrait;
     /**
@@ -15,10 +16,10 @@ class UpdateSubCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $admin = auth('admin')->user();
-        if (!$admin)
+        $vendor = auth('admin')->user();
+        if (!$vendor)
             return false;
-        return $admin->hasRole('admin');
+        return $vendor->hasRole('admin');
     }
 
     /**
@@ -29,17 +30,14 @@ class UpdateSubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'              => 'sometimes', 'string', 'max:255', 'unique:sub_categories,name' . $this->route('subCategory')->id,
-            'description'       => ['nullable', 'string', 'max:255'],
-            'main_category_id'  => ['sometimes', 'exists:main_categories,id']
-        ];
-    }
+            'name'              => 'required|string|max:255|unique:vendors,name',
+            'address'           => 'required|string|max:255',
+            'email'             => 'required|string|email|max:255|unique:vendors',
+            'password'          => 'required|string|min:8',
+            'sub_category_id'   => 'required|exists:sub_categories,id',
+            'main_category_id'  => ['required',new MainCategoryExists($this->sub_category_id)],
+            'image'             => ['nullable', 'image', 'mimes:png,jpg,jpeg'],
 
-    public function messages(): array
-    {
-        return [
-            'name.unique' => 'this sub-category already exists',
-            'main_category_id.exists' => 'this main category id is not found in main category table'
         ];
     }
 

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Traits\ImageTrait;
 use App\Models\SubCategory;
-use Illuminate\Support\Str;
 use App\Traits\ResponseTrait;
 use App\Http\Resources\SubCategoryResourcs;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Observers\SubCategoryImageObserver;
+use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -63,5 +64,16 @@ class SubCategoryController extends Controller
     {
         $subCategory->delete();
         return $this->deletedResponse('sub-category deleted successfully');
+    }
+
+
+    /**
+     * update and change the specified sub-category image from storage.
+     */
+    public function updateImage(SubCategory $subCategory, Request $request) //this function has observer
+    {
+        $observer = new SubCategoryImageObserver();
+        $observer->photoChange($subCategory, $request);
+        return $this->successResponse('sub-category photo successfully changed', 'sub-category', new SubCategoryResourcs($subCategory));
     }
 }

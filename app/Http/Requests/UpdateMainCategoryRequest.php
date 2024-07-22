@@ -29,7 +29,7 @@ class UpdateMainCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|max:255|unique:main_categories,name',
+            'name' => 'sometimes', 'max:255', 'unique:main_categories,name' . $this->route('mainCategory')->id,
             'description' => 'sometimes|string|max:255',
 
         ];

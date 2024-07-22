@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\SubCategory;
+use App\Observers\SubCategoryImageObserver;
 use App\Observers\SubCategoryObserver;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Sanctum;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         SubCategory::observe(SubCategoryObserver::class);
+        SubCategory::observe(SubCategoryImageObserver::class);
 
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
