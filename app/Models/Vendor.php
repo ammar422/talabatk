@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -14,7 +15,7 @@ class Vendor extends Model
     use HasFactory, HasApiTokens, HasRoles;
 
     protected $guard_name = 'api';
-    
+
     protected $fillable = [
         'name',
         'address',
@@ -36,7 +37,7 @@ class Vendor extends Model
         ];
     }
 
-    
+
     public function Image(): Attribute
     {
         return Attribute::make(
@@ -55,5 +56,10 @@ class Vendor extends Model
     public function subCategory(): BelongsTo
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
+    }
+
+    public function product(): HasMany
+    {
+        return $this->hasMany(Product::class, 'vendor_id', 'id');
     }
 }

@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\SubCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\MainCategory;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SubCategorySeeder extends Seeder
 {
@@ -15,7 +16,12 @@ class SubCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        SubCategory::factory(10)->create();
+        // SubCategory::factory(10)->create();
+
+        $mainCategories = MainCategory::all();
+        foreach ($mainCategories as $mainCategory) {
+            SubCategory::factory()->count(2)->create(['main_category_id' => $mainCategory->id]);
+        }
 
         $permissions = [
             'view sub categories',

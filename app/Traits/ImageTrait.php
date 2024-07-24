@@ -6,7 +6,7 @@ trait ImageTrait
 {
     public function saveImage($folder, $image)
     {
-        $image->store($folder, 'vendor-images');
+        $image->store('/', $folder);
         $filename = $image->hashName();
         $path = 'images/' . $folder . '/' . $filename;
         return $path;

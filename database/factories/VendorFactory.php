@@ -18,13 +18,19 @@ class VendorFactory extends Factory
      */
     public function definition(): array
     {
+        $mainCategory = MainCategory::inRandomOrder()->first();
+        $subCategory = SubCategory::where('main_category_id', $mainCategory->id)->inRandomOrder()->first();
+
+
+
+
         return [
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'email' => $this->faker->unique()->email(),
             'password' => bcrypt('123456789'),
-            'main_category_id' => MainCategory::inRandomOrder()->first()->id,
-            'sub_category_id' => SubCategory::inRandomOrder()->first()->id
+            'main_category_id' => $mainCategory->id,
+            'sub_category_id' => $subCategory->id
         ];
     }
 }

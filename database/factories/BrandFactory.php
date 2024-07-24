@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\MainCategory;
-use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SubCategory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Brand>
  */
-class SubCategoryFactory extends Factory
+class BrandFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +19,6 @@ class SubCategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->sentence(),
-            'main_category_id' => MainCategory::inRandomOrder()->first()->id
         ];
     }
 }

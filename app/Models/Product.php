@@ -6,17 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SubCategory extends Model
+class Product extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'id',
         'name',
         'description',
+        'price',
+        'stock',
         'image',
-        'main_category_id'
+        'size',
+        'sub_category_id',
+        'main_category_id',
+        'vendor_id',
+        'brand_id',
     ];
 
 
@@ -31,20 +36,26 @@ class SubCategory extends Model
 
 
 
-
+    
     //relations
+
+    public function subCategory(): BelongsTo
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
+    }
+
     public function mainCategory(): BelongsTo
     {
         return $this->belongsTo(MainCategory::class, 'main_category_id', 'id');
     }
 
-    public function vendor(): HasMany
+    public function vendor(): BelongsTo
     {
-        return $this->hasMany(Vendor::class, 'sub_category_id', 'id');
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
     }
 
-    public function product(): HasMany
+    public function brand(): BelongsTo
     {
-        return $this->hasMany(Product::class, 'sub_category_id', 'id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use App\Models\SubCategory;
+use App\Observers\ProductObserver;
 use App\Observers\SubCategoryImageObserver;
 use App\Observers\SubCategoryObserver;
 use Illuminate\Http\Request;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     {
         SubCategory::observe(SubCategoryObserver::class);
         SubCategory::observe(SubCategoryImageObserver::class);
+        Product::observe(ProductObserver::class);
 
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
