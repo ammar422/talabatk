@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class CheckoutController extends Controller
                 $cart->product->decrement('stock', $cart->quantity);
             }
             DB::commit();
-            return $this->successResponse('Your order has been received successfully', 'order', $order);
+            return $this->successResponse('Your order has been received successfully', 'order', new OrderResource($order));
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->faildResponse('Checkout failed', 400);
