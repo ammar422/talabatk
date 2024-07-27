@@ -30,8 +30,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        $token = $user->createToken('api-token');
+        $token = $user->createToken('cutomer-token', ['role:customer']);
         return response()->json([
             'status' => true,
             'message' => 'user registered successfully',

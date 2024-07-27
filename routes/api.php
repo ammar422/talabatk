@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -27,6 +28,14 @@ route::prefix('v1')->group(function () {
         //products 
         route::get('product', [ProductController::class, 'index'])->name('product.index');
         route::get('product/{product}', [ProductController::class, 'show'])->name('product.show');
+
+        //cart
+        route::get('cart', [CartController::class, 'index'])->name('cart.index');
+        route::get('cart/{cart}', [CartController::class, 'show'])->name('cart.show');
+        route::post('cart', [CartController::class, 'store'])->name('cart.store');
+        route::put('cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+        route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+        route::delete('cart_delete_all', [CartController::class, 'deleteAll'])->name('cart.deleteAll');
     });
 
 
