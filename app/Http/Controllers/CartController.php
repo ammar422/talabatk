@@ -16,8 +16,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('user_id', auth('api')->id())->get();
-        return $this->successResponse('cart retrieved successfully', 'cart', CartResource::collection($cart));
+        $cart = Cart::with('product')->where('user_id', auth('api')->id())->get();
+        $tottalPrice = $cart->sum(fn ($cartItem) => $cartItem->product->price * $cartItem->quantity);
+        return response()->json([
+            'status' => true,
+            'message' => 'cart retrieved successfully',
+            'cart' => CartResource::collection($cart),
+            'total_price' => $tottalPrice
+        ]);
     }
 
     /**

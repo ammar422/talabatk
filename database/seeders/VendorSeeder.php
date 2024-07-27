@@ -16,9 +16,9 @@ class VendorSeeder extends Seeder
      */
     public function run(): void
     {
-        // Vendor::factory(10)->create([
-        //     'password' => bcrypt('123456789')
-        // ]);
+        Vendor::factory(10)->create([
+            'password' => bcrypt('123456789')
+        ]);
 
         $subCategories = SubCategory::all();
         foreach ($subCategories as $subCategory) {

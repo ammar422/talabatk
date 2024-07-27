@@ -22,7 +22,8 @@ class CartSeeder extends Seeder
             'view cart',
             'create cart',
             'update cart',
-            'delete cart'
+            'delete from cart',
+            'delete all cart'
         ];
         foreach ($permissions as $permission) {
             Permission::create([
@@ -31,7 +32,7 @@ class CartSeeder extends Seeder
             ]);
         }
 
-        Role::findByName('customer' , 'api') ->givePermissionTo($permissions);
-        Role::findByName('admin' , 'api') ->givePermissionTo($permissions);
+        Role::findByName('customer', 'api')->givePermissionTo($permissions);
+        Role::findByName('admin', 'api')->givePermissionTo($permissions);
     }
 }

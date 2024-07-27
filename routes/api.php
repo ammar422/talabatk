@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -36,6 +37,9 @@ route::prefix('v1')->group(function () {
         route::put('cart/{cart}', [CartController::class, 'update'])->name('cart.update');
         route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
         route::delete('cart_delete_all', [CartController::class, 'deleteAll'])->name('cart.deleteAll');
+
+        //checkout
+        route::post('checkout' , CheckoutController::class)->name('order.checkout');
     });
 
 
