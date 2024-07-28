@@ -33,6 +33,7 @@ class VendorController extends Controller
         $validatedData = $request->validated();
         $validatedData['image'] = $image;
         $vendor = Vendor::create($validatedData);
+        $vendor->assignRole('vendor');
         return $this->successResponse('vendor created successfully', 'vendor', new VendorResource($vendor));
     }
 

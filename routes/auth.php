@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\Admin\logindAdminController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\DeliveryBoy\LoginDeliveryBoyController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\Vendor\VendorAuthController;
 
@@ -67,3 +68,13 @@ route::post('vendor/login', [VendorAuthController::class, 'login'])
 route::post('vendor/logout', [VendorAuthController::class, 'destroy'])
     ->middleware(['auth:sanctum', 'role:vendor'])
     ->name('vendor.logout');
+
+
+// delivery boy authentication routes
+route::post('delivery_boy/login', [LoginDeliveryBoyController::class, 'login'])
+    ->middleware('guest')
+    ->name('delivery-boy.login');
+
+route::post('delivery_boy/logout', [LoginDeliveryBoyController::class, 'logout'])
+    ->middleware(['auth:sanctum', 'role:delivery'])
+    ->name('delivery-boy.logout');

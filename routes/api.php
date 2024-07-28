@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DeliveryBoyController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -40,6 +41,7 @@ route::prefix('v1')->group(function () {
 
         //checkout
         route::post('checkout' , CheckoutController::class)->name('order.checkout');
+
     });
 
 
@@ -66,6 +68,9 @@ route::prefix('v1')->group(function () {
 
         //products
         route::post('product', [ProductController::class, 'store'])->name('product.store');
+
+        //delevery boy
+        route::post('delivery_boy/register' , [DeliveryBoyController::class ,'store'])->name('deliovery-boy.register');
     });
 
 
@@ -87,6 +92,8 @@ route::prefix('v1')->group(function () {
         route::put('product/{product}', [ProductController::class, 'update'])->name('product.update');
         route::delete('product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     });
+
+    
 
 
     require __DIR__ . '/auth.php';

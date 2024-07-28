@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $products = Product::paginate(20);
         return $this->successResponse('all products get successfully', 'products', $products); //dont use product resource becuase the pagination
     }
 

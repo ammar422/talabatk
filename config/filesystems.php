@@ -66,6 +66,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'delivery-boy-images' => [
+            'driver' => 'local',
+            'root' => base_path('uploads/images/delivery-boy-images'),
+            'url' => env('APP_URL') . '/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
