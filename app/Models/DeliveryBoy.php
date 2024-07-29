@@ -36,8 +36,8 @@ class DeliveryBoy extends Model
 
     public function image(): Attribute
     {
-        return new Attribute(
-            get: fn ($image) => base_path() . '/uploads/' . $image
+        return Attribute::make(
+            get: fn ($image) =>  env('APP_URL') . '/uploads/' . $image
         );
     }
 

@@ -39,13 +39,12 @@ class Vendor extends Model
     }
 
 
-    public function Image(): Attribute
+    public function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($val) => base_path() . '/uploads/' . $val
+            get: fn ($image) =>  env('APP_URL') . '/uploads/' . $image
         );
     }
-
 
 
 
