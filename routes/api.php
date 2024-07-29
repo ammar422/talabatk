@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliveryBoyController;
+use App\Http\Controllers\DeliveryBoyWalletController;
 use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -75,6 +76,11 @@ route::prefix('v1')->group(function () {
         route::put('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'update'])->name('delivery-boy.update');
         route::delete('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'destroy'])->name('delivery-boy.destroy');
         route::post('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'changeImage'])->name('delivery-boy.changeImage');
+
+        //delivery boy wallet 
+        route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
+        route::get('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'show'])->name('delivery-boy-wallet.show');
+        route::put('delivery_boy_wallet/{delivery_boy_wallet}' , [DeliveryBoyWalletController::class , 'update'])->name('delivery-boy-wallet.update');
     });
 
 

@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             OrderItemSeeder::class,
             DeliveryBoySeeder::class,
+            DeliveryBoyWalletSeeder::class,
         ]);
     }
 }

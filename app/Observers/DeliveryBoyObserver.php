@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\DeliveryBoy;
+use App\Models\DeliveryBoyWallet;
 use Illuminate\Support\Str;
 
 class DeliveryBoyObserver
@@ -12,7 +13,10 @@ class DeliveryBoyObserver
      */
     public function created(DeliveryBoy $deliveryBoy): void
     {
-        //
+        DeliveryBoyWallet::create([
+            'deliveryBoy_id' => $deliveryBoy->id,
+            'balance' => 0
+        ]);
     }
 
     /**
@@ -31,6 +35,7 @@ class DeliveryBoyObserver
         try {
             $image = Str::after($deliveryBoy->image, env('APP_NAME'));
             unlink(base_path() . $image);
+
         } catch (\Throwable $th) {
             throw $th;
         }

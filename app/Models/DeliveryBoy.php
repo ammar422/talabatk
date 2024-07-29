@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -38,5 +39,11 @@ class DeliveryBoy extends Model
         return new Attribute(
             get: fn ($image) => base_path() . '/uploads/' . $image
         );
+    }
+
+
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(DeliveryBoyWallet::class, 'deliveryBoy_id', 'id');
     }
 }
