@@ -8,6 +8,7 @@ use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\VendorWalletController;
 use Illuminate\Support\Facades\Route;
 
 route::prefix('v1')->group(function () {
@@ -80,7 +81,11 @@ route::prefix('v1')->group(function () {
         //delivery boy wallet 
         route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
         route::get('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'show'])->name('delivery-boy-wallet.show');
-        route::put('delivery_boy_wallet/{delivery_boy_wallet}' , [DeliveryBoyWalletController::class , 'update'])->name('delivery-boy-wallet.update');
+        route::put('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'update'])->name('delivery-boy-wallet.update');
+
+        //vendor wallet 
+        route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
+        route::put('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'update'])->name('vendor-wallet.update');
     });
 
 

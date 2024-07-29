@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Models\DeliveryBoy;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Vendor;
 use App\Observers\DeliveryBoyImageObserver;
 use App\Observers\DeliveryBoyObserver;
 use App\Observers\ProductObserver;
 use App\Observers\SubCategoryImageObserver;
 use App\Observers\SubCategoryObserver;
+use App\Observers\VendorObserver;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         DeliveryBoy::observe(DeliveryBoyObserver::class);
         DeliveryBoy::observe(DeliveryBoyImageObserver::class);
+        Vendor::observe(VendorObserver::class);
 
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
