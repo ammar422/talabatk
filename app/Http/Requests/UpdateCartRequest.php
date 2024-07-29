@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CartElementBelongToAuthenticatedUser;
 use App\Traits\ResponseTrait;
 use Illuminate\Validation\Rule;
 use App\Rules\LessThanOrEqualProductStock;
@@ -31,8 +32,8 @@ class UpdateCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required', 'exists:products,id'],
-            'quantity' => ['required', 'integer', 'min:1', new LessThanOrEqualProductStock($this->product_id)]
+            'cart_element_id' => ['required', 'exists:carts,id', new CartElementBelongToAuthenticatedUser($this->cart_element_id)],
+            'quantity' => ['required', 'integer', 'min:1', new LessThanOrEqualProductStock($this->cart_element_id)]
         ];
     }
 

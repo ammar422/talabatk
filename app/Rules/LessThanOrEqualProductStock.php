@@ -2,24 +2,27 @@
 
 namespace App\Rules;
 
-use App\Models\Product;
-use Closure;
+use App\Models\Cart;
 use Illuminate\Contracts\Validation\Rule;
 
 class LessThanOrEqualProductStock implements Rule
 {
     protected $product;
-    protected $product_id;
+    protected $cart_element_id;
 
-    public function __construct($product_id)
+    public function __construct($cart_element_id)
     {
-        $this->product_id = $product_id;
+        $this->cart_element_id = $cart_element_id;
     }
-    
+
     public function passes($attribute, $value)
     {
-        $this->product = Product::find($this->product_id);
-        return $value <= $this->product->stock;
+        $cartElement = Cart::find($this->cart_element_id);
+        if ($cartElement) {
+            $this->product = $cartElement->product;
+            return $value <= $this->product->stock;
+        }
+        return false;
     }
 
     public function message()
