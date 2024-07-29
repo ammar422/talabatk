@@ -19,6 +19,11 @@ class DeliveryBoySeeder extends Seeder
             'password' => bcrypt('123456789')
         ]);
 
+        $deliveryBoys =  DeliveryBoy::all();
+        foreach ($deliveryBoys as $deliveryBoy) {
+            $deliveryBoy->assignRole('delivery');
+        }
+
         $permissions = [
             'view delivery boys',
             'create delivery boys',

@@ -7,7 +7,6 @@ use App\Http\Resources\DelivryBoyResource;
 use App\Models\DeliveryBoy;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
