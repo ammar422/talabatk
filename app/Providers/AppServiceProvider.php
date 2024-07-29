@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\DeliveryBoy;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Observers\DeliveryBoyImageObserver;
+use App\Observers\DeliveryBoyObserver;
 use App\Observers\ProductObserver;
 use App\Observers\SubCategoryImageObserver;
 use App\Observers\SubCategoryObserver;
@@ -33,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
         SubCategory::observe(SubCategoryObserver::class);
         SubCategory::observe(SubCategoryImageObserver::class);
         Product::observe(ProductObserver::class);
+        DeliveryBoy::observe(DeliveryBoyObserver::class);
+        DeliveryBoy::observe(DeliveryBoyImageObserver::class);
 
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 

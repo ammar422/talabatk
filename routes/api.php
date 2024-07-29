@@ -40,8 +40,7 @@ route::prefix('v1')->group(function () {
         route::delete('cart_delete_all', [CartController::class, 'deleteAll'])->name('cart.deleteAll');
 
         //checkout
-        route::post('checkout' , CheckoutController::class)->name('order.checkout');
-
+        route::post('checkout', CheckoutController::class)->name('order.checkout');
     });
 
 
@@ -70,7 +69,12 @@ route::prefix('v1')->group(function () {
         route::post('product', [ProductController::class, 'store'])->name('product.store');
 
         //delevery boy
-        route::post('delivery_boy/register' , [DeliveryBoyController::class ,'store'])->name('deliovery-boy.register');
+        route::get('delivery_boy', [DeliveryBoyController::class, 'index'])->name('delivery-boy.index');
+        route::get('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'show'])->name('delivery-boy.show');
+        route::post('delivery_boy/register', [DeliveryBoyController::class, 'store'])->name('delivery-boy.register');
+        route::put('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'update'])->name('delivery-boy.update');
+        route::delete('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'destroy'])->name('delivery-boy.destroy');
+        route::post('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'changeImage'])->name('delivery-boy.changeImage');
     });
 
 
@@ -93,7 +97,7 @@ route::prefix('v1')->group(function () {
         route::delete('product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     });
 
-    
+
 
 
     require __DIR__ . '/auth.php';
