@@ -25,9 +25,10 @@ class SubCategory extends Model
     public function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($image) => base_path() . '/uploads/' . $image
+            get: fn ($image) =>  env('APP_URL') . '/uploads/' . $image
         );
     }
+
 
 
 

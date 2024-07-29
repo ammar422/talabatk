@@ -16,13 +16,7 @@ class MainCategory extends Model
         'description'
     ];
 
-    public function image(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($image) =>  env('APP_URL') . '/uploads/' . $image
-        );
-    }
-
+   
     public function subCategory(): HasMany
     {
         return $this->hasMany(SubCategory::class, 'main_category_id', 'id');
