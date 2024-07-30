@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\LessThanOrEqualProductStock;
+use App\Rules\StockValied;
 use App\Traits\ResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,7 +32,7 @@ class StoreCartRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'exists:products,id', Rule::unique('carts')->where(fn ($qr) => $qr->where('user_id', auth()->id()))],
-            'quantity' => ['required', 'integer', 'min:1', new LessThanOrEqualProductStock($this->product_id)]
+            'quantity' => ['required', 'integer', 'min:1', new StockValied($this->product_id)]
         ];
     }
     public function messages()
