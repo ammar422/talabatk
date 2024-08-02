@@ -22,7 +22,12 @@ class VendorAuthController extends Controller
         if ($oldTokens)
             $oldTokens->delete();
         $token =   $vendor->createToken('vendor-token', ['role:vendor']);
-        return $this->successResponse('loged in successfully', 'token', $token->plainTextToken);
+        return response()->json([
+            'status' => true,
+            'status' => 'loged in successfully',
+            'vendor' => $vendor,
+            'token' =>  $token->plainTextToken
+        ]);
     }
 
 
