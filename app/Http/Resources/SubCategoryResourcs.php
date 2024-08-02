@@ -15,6 +15,7 @@ class SubCategoryResourcs extends JsonResource
     public function toArray(Request $request): array
     {
         $data = [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'main-category' => $this->mainCategory->name,
