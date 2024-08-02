@@ -19,6 +19,7 @@ class BrandFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->sentence(),
+            'image' => $this->faker->imageUrl(640, 480, 'brands', true)
         ];
     }
 }

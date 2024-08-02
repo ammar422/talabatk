@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliveryBoyController;
@@ -43,6 +44,10 @@ route::prefix('v1')->group(function () {
 
         //checkout
         route::post('checkout', CheckoutController::class)->name('order.checkout');
+
+        //brand
+        route::get('brand', [BrandController::class, 'index'])->name('brand.index');
+        route::get('brand/{brand}', [BrandController::class, 'show'])->name('brand.show');
     });
 
 
@@ -86,6 +91,13 @@ route::prefix('v1')->group(function () {
         //vendor wallet 
         route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
         route::put('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'update'])->name('vendor-wallet.update');
+
+        //brand
+
+        route::post('brand', [BrandController::class, 'store'])->name('brand.store');
+        route::put('brand/{brand}', [BrandController::class, 'update'])->name('brand.update');
+        route::delete('brand/{brand}', [BrandController::class, 'destroy'])->name('brand.destroy');
+        route::post('brand/{brand}/image', [BrandController::class, 'updateImage'])->name('brand.updateImage');
     });
 
 

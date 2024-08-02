@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             DeliveryBoySeeder::class,
             DeliveryBoyWalletSeeder::class,
             VendorWalletSeeder::class,
+            BrandMainCategorySeeder::class,
         ]);
     }
 }

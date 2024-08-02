@@ -29,7 +29,7 @@ class ProductObserver
     public function deleted(Product $product): void
     {
         try {
-            $image = Str::after($product->image, 'talabatk');
+            $image = Str::after($product->image, env('APP_NAME'));
             unlink(base_path() .  $image);
         } catch (\Exception $e) {
             // $e->getMessage();
