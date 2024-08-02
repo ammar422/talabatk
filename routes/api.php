@@ -88,7 +88,7 @@ route::prefix('v1')->group(function () {
         route::put('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'update'])->name('delivery-boy-wallet.update');
 
         //vendor wallet 
-        route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
+        route::put('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'update'])->name('vendor-wallet.update');
 
         //brand
 
@@ -139,9 +139,8 @@ route::prefix('v1')->group(function () {
         //vendor
 
 
-        //vendor wallet 
-        route::put('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'update'])->name('vendor-wallet.update');
-
+         //vendor wallet 
+         route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
 
         //products
         route::put('product/{product}', [ProductController::class, 'update'])->name('product.update');
