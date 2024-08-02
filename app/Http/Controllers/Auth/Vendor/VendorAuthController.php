@@ -6,6 +6,7 @@ use App\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\Vendor\VendorLoginRequest;
+use App\Http\Resources\VendorResource;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ class VendorAuthController extends Controller
         return response()->json([
             'status' => true,
             'status' => 'loged in successfully',
-            'vendor' => $vendor,
+            'vendor' => new VendorResource($vendor),
             'token' =>  $token->plainTextToken
         ]);
     }
