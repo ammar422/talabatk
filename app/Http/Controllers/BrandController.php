@@ -71,7 +71,16 @@ class BrandController extends Controller
         ]);
         if ($validator->fails())
             return $this->faildResponse($validator->errors(), 422);
-        unlink(base_path() . Str::after($brand->image, env('APP_NAME')));
+
+        $imagePath = parse_url($brand->image, PHP_URL_PATH);
+        $imageFilename = basename($imagePath);
+
+        $fullImagePath = base_path('uploads/images/brand-images/' . $imageFilename);
+
+        if (file_exists($fullImagePath) && is_file($fullImagePath)) {
+            unlink($fullImagePath);
+        }
+
         $image = $this->saveImage('brand-images', $request->image);
         $brand->update([
             'image' => $image
