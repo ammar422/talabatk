@@ -84,7 +84,7 @@ route::prefix('v1')->group(function () {
         route::post('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'changeImage'])->name('delivery-boy.changeImage');
 
         //delivery boy wallet 
-        route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
+        // route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
         route::get('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'show'])->name('delivery-boy-wallet.show');
         route::put('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'update'])->name('delivery-boy-wallet.update');
 
@@ -99,6 +99,32 @@ route::prefix('v1')->group(function () {
         route::delete('brand/{brand}', [BrandController::class, 'destroy'])->name('brand.destroy');
         route::post('brand/{brand}/image', [BrandController::class, 'updateImage'])->name('brand.updateImage');
     });
+
+
+
+
+    // Authenticated user (admin) and (delivery-boy) routes 'has role:admin|delivery'
+    route::middleware(['auth:sanctum', 'role:admin|delivery'])->group(function () {
+
+        //main-category
+
+
+        //sub-category 
+
+
+        //vendor
+
+
+        //products
+
+
+        //delivery boy wallet 
+        route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
+    });
+
+
+
+
 
 
 
