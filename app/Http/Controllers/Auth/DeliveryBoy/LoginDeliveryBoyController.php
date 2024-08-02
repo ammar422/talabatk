@@ -35,7 +35,7 @@ class LoginDeliveryBoyController extends Controller
         return response()->json([
             'status' => true,
             'mesage' => 'delivery boy loged in successfully',
-            'admin' => new DelivryBoyResource($deliveryBoy),
+            'delivery-boy' => new DelivryBoyResource($deliveryBoy),
             'token' => $token->plainTextToken,
         ]);
     }

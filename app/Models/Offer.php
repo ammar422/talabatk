@@ -16,5 +16,4 @@ class Offer extends Model
         'discount_amount',
     ];
 
-    public functio
 }
