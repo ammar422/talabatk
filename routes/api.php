@@ -6,6 +6,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliveryBoyController;
 use App\Http\Controllers\DeliveryBoyWalletController;
 use App\Http\Controllers\MainCategoryController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VendorController;
@@ -139,12 +140,53 @@ route::prefix('v1')->group(function () {
         //vendor
 
 
-         //vendor wallet 
-         route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
+        //vendor wallet 
+        route::get('vendor_wallet/{vendor_wallet}', [VendorWalletController::class, 'show'])->name('vendor-wallet.show');
 
         //products
         route::put('product/{product}', [ProductController::class, 'update'])->name('product.update');
         route::delete('product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+        //offer
+        Route::post('offer', [OfferController::class, 'store'])->name('offer.store');
+        Route::put('offer/{offer}', [OfferController::class, 'update'])->name('offer.update');
+        Route::delete('offer/{offer}', [OfferController::class, 'destroy'])->name('offer.destroy');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Authenticated user (admin) and (vendor) and (customer) routes 'has role:admin|vendor|customer'
+    route::middleware(['auth:sanctum', 'role:admin|vendor|customer'])->group(function () {
+
+        //main-category
+
+
+        //sub-category 
+
+
+        //vendor
+
+
+        //vendor wallet 
+
+
+        //products
+
+
+        //offer
+        route::get('offer', [OfferController::class, 'index'])->name('offer.index');
+        route::get('offer/{offer}', [OfferController::class, 'show'])->name('offer.show');
     });
 
 

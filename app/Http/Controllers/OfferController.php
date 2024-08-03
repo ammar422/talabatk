@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
+use App\Http\Resources\OfferResource;
+use App\Traits\ResponseTrait;
 
 class OfferController extends Controller
 {
+    use ResponseTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $allOffers = Offer::with('product')->paginate(10);
+        return $this->successResponse('all offers get successfully', 'all offers', $allOffers);
     }
 
     /**
@@ -21,7 +25,9 @@ class OfferController extends Controller
      */
     public function store(StoreOfferRequest $request)
     {
-        //
+
+        $offer = Offer::create($request->validated());
+        return $this->successResponse('offer created successfully', 'offer', new OfferResource($offer->load('product')));
     }
 
     /**
@@ -29,7 +35,7 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        //
+        return $this->successResponse('offer get successfully', 'offer', new OfferResource($offer->load('product')));
     }
 
     /**
@@ -37,7 +43,8 @@ class OfferController extends Controller
      */
     public function update(UpdateOfferRequest $request, Offer $offer)
     {
-        //
+        $offer->update($request->validated());
+        return $this->successResponse('the offer updated successfully', 'offer', new OfferResource($offer->load('product')));
     }
 
     /**
@@ -45,6 +52,7 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
+        return $this->deletedResponse('offer deleted succesffully');
     }
 }
