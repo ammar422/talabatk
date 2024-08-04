@@ -85,7 +85,7 @@ route::prefix('v1')->group(function () {
         route::post('delivery_boy/{delivery_boy}', [DeliveryBoyController::class, 'changeImage'])->name('delivery-boy.changeImage');
 
         //delivery boy wallet 
-        route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
+        route::get('delivery_boy_wallet/all', [DeliveryBoyWalletController::class, 'index'])->name('delivery-boy-wallet.index');
         route::put('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'update'])->name('delivery-boy-wallet.update');
 
         //vendor wallet 
@@ -118,7 +118,7 @@ route::prefix('v1')->group(function () {
 
 
         //delivery boy wallet 
-        route::get('delivery_boy_wallet/{delivery_boy_wallet}', [DeliveryBoyWalletController::class, 'show'])->name('delivery-boy-wallet.show');
+        route::get('delivery_boy_wallet', [DeliveryBoyWalletController::class, 'show'])->name('delivery-boy-wallet.show');
     });
 
 

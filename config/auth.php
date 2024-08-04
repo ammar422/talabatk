@@ -53,7 +53,11 @@ return [
         'admin' => [
             'driver' => 'sanctum',
             'provider' => 'admins',
-        ]
+        ],
+        'delivery_boy' => [
+            'driver' => 'sanctum',
+            'provider' => 'delivery_boys',
+        ],
     ],
 
     /*
@@ -85,6 +89,10 @@ return [
         'vendors' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Vendor::class),
+        ],
+        'delivery_boys' => [
+            'driver' => 'eloquent',
+            'model' =>env('AUTH_MODEL', App\Models\DeliveryBoy::class),
         ],
 
         // 'users' => [

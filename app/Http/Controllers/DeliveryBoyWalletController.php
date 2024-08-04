@@ -6,6 +6,7 @@ use App\Http\Resources\DeliveryBoyWalletResource;
 use App\Models\DeliveryBoyWallet;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class DeliveryBoyWalletController extends Controller
@@ -20,10 +21,10 @@ class DeliveryBoyWalletController extends Controller
 
 
 
-    public function show(DeliveryBoyWallet $deliveryBoyWallet)
+    public function show()
     {
-
-        return $this->successResponse('the wallet get successfully', 'wallet', new DeliveryBoyWalletResource($deliveryBoyWallet));
+        $wallet = DeliveryBoyWallet::where('deliveryBoy_id', auth('delivery_boy')->id())->first();
+        return $this->successResponse('the wallet get successfully', 'wallet', new DeliveryBoyWalletResource($wallet));
     }
 
 
